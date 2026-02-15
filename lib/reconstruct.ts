@@ -41,7 +41,15 @@ export const reconstruct = (token: Tokens): string => {
             token.followedBy ? '?=' :
               token.notFollowedBy ? '?!' :
                 '?:';
-      return `(${prefix}${createAlternate(token)})`;
+      let preprefix = '';
+      if (token.enableStack || token.disableStack) {
+        preprefix += '?';
+        if (token.enableStack) preprefix += reduceStack(token.enableStack);
+        if (token.dash) preprefix += '-';
+        if (token.disableStack) preprefix += reduceStack(token.disableStack);
+        preprefix += ':';
+      }
+      return `(${preprefix+prefix}${createAlternate(token)})`;
     }
     case types.REPETITION: {
       const { min, max } = token;

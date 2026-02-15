@@ -18,6 +18,9 @@ export type Group = Base<types.GROUP, {
   notFollowedBy?: boolean;
   lookBehind?: boolean;
   name?: string;
+  enableStack?: Token[];
+  disableStack?: Token[];
+  dash?: boolean;
 }>
 
 export type Set = Base<types.SET, {
